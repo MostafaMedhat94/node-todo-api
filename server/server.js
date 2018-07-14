@@ -11,9 +11,11 @@ const {User} = require('./models/user');
 const app = express();
 const port = process.env.PORT || 3000;
 
+
 app.use(bodyParser.json());
 
-app.post('/todos', (req, res) => {
+
+app.post('/todos', (req, res, next) => {
     const todo = new Todo({
         text: req.body.text
     });
@@ -27,7 +29,7 @@ app.post('/todos', (req, res) => {
         })
 });
 
-app.get('/todos', (req, res) => {
+app.get('/todos', (req, res, next) => {
     Todo.find()
         .then((todos) => {
             res.send({ todos });
@@ -37,7 +39,7 @@ app.get('/todos', (req, res) => {
         });
 });
 
-app.get('/todos/:id', (req, res) => {
+app.get('/todos/:id', (req, res, next) => {
     const id = req.params.id;
     
     // Validate user id using isValid()
@@ -59,7 +61,7 @@ app.get('/todos/:id', (req, res) => {
         });
 });
 
-app.delete('/todos/:id', (req, res) => {
+app.delete('/todos/:id', (req, res, next) => {
     const id = req.params.id;
 
     // Validate user id using isValid()
