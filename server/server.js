@@ -57,7 +57,28 @@ app.get('/todos/:id', (req, res) => {
         .catch((error) => {
             res.status(404).send(error);
         });
-})
+});
+
+app.delete('/todos/:id', (req, res) => {
+    const id = req.params.id;
+
+    // Validate user id using isValid()
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send({})
+    }
+
+    Todo.findByIdAndRemove(id)
+        .then((todo) => {
+            if (!todo) {
+                return res.status(404).send();
+            }
+            res.send({todo});
+        })
+        .catch((error) => {
+            res.status(404).send(error);
+        });
+});
+
 
 app.listen(port, () => {
     console.log(`Startrd on port ${port}`);
