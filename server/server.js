@@ -13,10 +13,6 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send('hell ya I am working');
-});
-
 app.post('/todos', (req, res) => {
     const todo = new Todo({
         text: req.body.text
@@ -32,14 +28,13 @@ app.post('/todos', (req, res) => {
 });
 
 app.get('/todos', (req, res) => {
-    res.send('hell ya I am working');
-    // Todo.find()
-    //     .then((todos) => {
-    //         res.send({ todos });
-    //     })
-    //     .catch((error) => {
-    //         res.status(400).send(error);
-    //     });
+    Todo.find()
+        .then((todos) => {
+            res.send({ todos });
+        })
+        .catch((error) => {
+            res.status(400).send(error);
+        });
 });
 
 app.get('/todos/:id', (req, res) => {
