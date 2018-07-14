@@ -34,7 +34,7 @@ app.get('/todos', (req, res) => {
         })
         .catch((error) => {
             res.status(400).send(error);
-        })
+        });
 });
 
 app.get('/todos/:id', (req, res) => {
