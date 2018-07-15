@@ -1,3 +1,5 @@
+'use strict'
+
 const mongoose = require('mongoose');
 
 // const port = process.env.MONGODB_URI || 'mongodb://localhost:27017/TodoApp';

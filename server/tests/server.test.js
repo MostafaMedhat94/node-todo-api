@@ -74,6 +74,7 @@ describe('POST /todos', () => {
     });
 });
 
+'use strict'
 
 describe('GET /todos', () => {
     it('should retrieve all the todos', (done) => {
