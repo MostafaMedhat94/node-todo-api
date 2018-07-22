@@ -10,6 +10,7 @@ const MainUserRouter = express.Router();
 
 // Local imports
 const {User} = require('../../models/user');
+const {authenticate} = require('../../middleware/user-authentication');
 
 MainUserRouter.route('/')
 
@@ -41,6 +42,12 @@ MainUserRouter.route('/')
                       .catch((error) => {
                           res.status(400).send(error);
                       });
-              })
+              });
+
+MainUserRouter.route('/me')
+              // GET the user after authentication
+              .get(authenticate, (req, res, next) => {
+                  res.send(req.user);
+              });
 
 module.exports = MainUserRouter;
