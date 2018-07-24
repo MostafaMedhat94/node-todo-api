@@ -1,4 +1,5 @@
 'use strict'
+
 const {User} = require('../models/user');
 
 const authenticate = (req, res, next) => {
@@ -19,7 +20,7 @@ const authenticate = (req, res, next) => {
             next();
         })
         .catch((error) => {
-            res.status(401).send(error);
+            res.status(401).send();
         });
 };
 
