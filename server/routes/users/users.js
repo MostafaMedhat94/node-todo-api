@@ -50,4 +50,23 @@ MainUserRouter.route('/me')
                   res.send(req.user);
               });
 
+
+MainUserRouter.route('/login')
+              // Find user by email and hashed password
+              .post((req, res, next) => {
+                  const body = _.pick(req.body, ['email', 'password']);
+
+                  // Validate user by credentials
+                  User.findByCredentials(body.email, body.password)
+                      .then((user) => {
+                          return user.generateAuthToken()
+                              .then((token) => {
+                                  res.header('x-auth', token).send(user);
+                              });
+                      })
+                      .catch((error) => {
+                          res.status(400).send(error);
+                      });
+              })
+
 module.exports = MainUserRouter;
