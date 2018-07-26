@@ -69,4 +69,16 @@ MainUserRouter.route('/login')
                       });
               })
 
+MainUserRouter.route('/me/token')
+              // Logout user and clear his/her token
+              .delete(authenticate, (req, res, next) => {
+                  req.user.removeToken(req.token)
+                          .then(() => {
+                              res.status(200).send();
+                          })
+                          .catch((err) => {
+                              res.status(400).send(err);
+                          })
+              })
+
 module.exports = MainUserRouter;
